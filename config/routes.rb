@@ -8,7 +8,11 @@ Rails.application.routes.draw do
         post 'sign_up', to: 'registrations#create'
       end
 
-      resources :assets, only: [:index, :create, :update, :destroy]
+      resources :assets, only: [:index] do
+        resources :transactions, except: [:index]
+      end
+
+      resources :transactions, only: [:index]
     end
   end
 end

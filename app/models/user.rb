@@ -6,4 +6,5 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :assets, dependent: :destroy
+  has_many :transactions, through: :assets
 end
