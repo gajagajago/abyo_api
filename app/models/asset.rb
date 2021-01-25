@@ -1,5 +1,5 @@
 class Asset < ApplicationRecord
-  CATEGORIES = ['stock', 'real_estate', 'bank', 'cash', 'etc']
+  CATEGORIES = ['credit', 'stock', 'real_estate', 'bank', 'cash', 'etc']
 
   belongs_to :user
   has_many :transactions
