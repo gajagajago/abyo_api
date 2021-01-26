@@ -1,6 +1,6 @@
 class Api::V1::TransactionsController < ApplicationController
   def index
-    @transaction = current_user.transactions.all
+    @transaction = current_user.transactions.order(id: :desc).includes([:asset])
 
     render json: @transaction
   end
