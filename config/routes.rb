@@ -9,7 +9,7 @@ Rails.application.routes.draw do
       end
 
       resources :assets, only: [:index] do
-        resources :transactions, except: [:index]
+        resources :transactions, only: [:create, :destroy]
       end
 
       resources :transactions, only: [:index]

@@ -16,6 +16,19 @@ class Api::V1::TransactionsController < ApplicationController
     end
   end
 
+  def destroy
+    @transaction = Transaction.find(params[:id])
+    @transaction.amount = @transaction.amount * (-1)
+
+    if @transaction.destroy
+      Asset.update_amount(@transaction)
+      render json: { msg: "transaction deleted" }
+    else
+      render json: { msg: "transaction delete failed" }, status: 404
+    end
+
+  end
+
   private
   def transaction_params
     params.require(:transaction).permit(:title, :amount, :time)
