@@ -4,5 +4,4 @@ class Api::V1::AssetsController < ApplicationController
 
     render json: @asset
   end
-
 end
