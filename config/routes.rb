@@ -13,6 +13,7 @@ Rails.application.routes.draw do
       end
 
       resources :transactions, only: [:index]
+      resources :stocks, only: [:index]
     end
   end
 end
