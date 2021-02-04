@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_03_043759) do
+ActiveRecord::Schema.define(version: 2021_02_04_075337) do
 
   create_table "assets", force: :cascade do |t|
     t.string "category"
@@ -29,6 +29,7 @@ ActiveRecord::Schema.define(version: 2021_02_03_043759) do
     t.float "amount"
     t.datetime "time"
     t.integer "asset_id"
+    t.string "stock_code"
     t.index ["asset_id"], name: "index_transactions_on_asset_id"
   end
 

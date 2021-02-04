@@ -27,6 +27,7 @@ gem 'rack-cors'
 gem 'devise'
 gem 'simple_token_authentication', '~> 1.0' # see semver.org
 gem 'active_model_serializers'
+gem 'nokogiri'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

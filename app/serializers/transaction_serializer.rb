@@ -1,3 +1,6 @@
+require 'net/http'
+require 'nokogiri'
+
 class TransactionSerializer < ActiveModel::Serializer
   attributes :id, :title, :amount, :time
 

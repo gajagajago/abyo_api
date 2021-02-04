@@ -1,6 +1,18 @@
+require 'net/http'
+require 'nokogiri'
+
 class Api::V1::TransactionsController < ApplicationController
   def index
     @transaction = current_user.transactions.order(id: :desc).includes([:asset])
+
+    @transaction.each do |t|
+      if t.asset.category == 'stock'
+        t.title = "#{t.title} #{t.amount.to_i}주"
+        res = Net::HTTP.get(URI.parse("http://asp1.krx.co.kr/servlet/krx.asp.XMLSise?code=#{t['stock_code']}"))
+        m = res.match(/CurJuka="(\S+)"/)[1].gsub!(/\,/, "")
+        t.amount = m.to_f * t.amount
+      end
+    end
 
     render json: @transaction
   end
