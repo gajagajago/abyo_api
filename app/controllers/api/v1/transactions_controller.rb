@@ -8,13 +8,9 @@ class Api::V1::TransactionsController < ApplicationController
     @transaction.each do |t|
       if t.asset.category == 'stock'
         t.title = "#{t.title} #{t.amount.to_i}주"
-
-        # Problem: Rails not performing asynchronous job. Need JS implementation here
-        res = Net::HTTP.get(URI.parse("http://asp1.krx.co.kr/servlet/krx.asp.XMLSise?code=#{t['stock_code']}"))
-        puts res
-        m = res.match(/day_EndPrice="(\S+)"/)[1].gsub!(/\,/, "")
-        puts "m : #{m}"
-        # t.amount = m.to_f * t.amount
+        res = Net::HTTP.get_response(URI.parse("http://asp1.krx.co.kr/servlet/krx.asp.XMLSise?code=#{t.stock_code}"))
+        m = res.body.match(/day_EndPrice="(\S+)"/)[1].gsub!(/\,/, "")
+        t.amount = m.to_f * t.amount
       end
     end
 
@@ -47,6 +43,6 @@ class Api::V1::TransactionsController < ApplicationController
 
   private
   def transaction_params
-    params.require(:transaction).permit(:title, :amount, :time)
+    params.require(:transaction).permit(:title, :amount, :time, :stock_code)
   end
 end

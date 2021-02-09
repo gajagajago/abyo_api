@@ -11,7 +11,13 @@ namespace :import do
 
       stock_data = Hash[[headers, row].transpose]
 
-      stock = Stock.new(name: stock_data['회사명'], code: stock_data['종목코드'])
+      code = stock_data['종목코드'].to_s
+
+      while code.length < 6
+        code.prepend("0")
+      end
+
+      stock = Stock.new(name: stock_data['회사명'], code: code)
       if stock.save!
         puts "Saving #{stock.name}: #{stock.code}"
       end
