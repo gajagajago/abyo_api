@@ -14,4 +14,9 @@ class Asset < ApplicationRecord
     @asset = Asset.find(transaction.asset_id)
     @asset.update_attribute(:amount, @asset.amount + transaction.amount)
   end
+
+  def self.update_stock_amount(asset_id, amount)
+    @asset = Asset.find(asset_id)
+    @asset.update_attribute(:amount, amount)
+  end
 end
