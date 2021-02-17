@@ -7,4 +7,6 @@ class User < ApplicationRecord
 
   has_many :assets, dependent: :destroy
   has_many :transactions, through: :assets
+  has_many :products, dependent: :destroy
+  has_many :favorites, dependent: :destroy
 end

@@ -10,13 +10,29 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_04_075337) do
+ActiveRecord::Schema.define(version: 2021_02_17_120848) do
 
   create_table "assets", force: :cascade do |t|
     t.string "category"
     t.float "amount"
     t.integer "user_id"
     t.index ["user_id"], name: "index_assets_on_user_id"
+  end
+
+  create_table "favorites", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "product_id"
+    t.index ["product_id"], name: "index_favorites_on_product_id"
+    t.index ["user_id"], name: "index_favorites_on_user_id"
+  end
+
+  create_table "products", force: :cascade do |t|
+    t.string "title"
+    t.text "description"
+    t.float "price"
+    t.string "image_url"
+    t.integer "user_id"
+    t.index ["user_id"], name: "index_products_on_user_id"
   end
 
   create_table "stocks", force: :cascade do |t|
