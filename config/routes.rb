@@ -14,7 +14,9 @@ Rails.application.routes.draw do
 
       resources :transactions, only: [:index]
       resources :stocks, only: [:index]
-      resources :products, only: [:index, :create, :destroy]
+      resources :products, only: [:index, :create, :destroy] do
+        resources :favorites, only: [:create, :destroy]
+      end
     end
   end
 end
