@@ -4,6 +4,7 @@ class Api::V1::RegistrationsController < ApplicationController
 
     if @user.save!
       Asset.init_user_assets(@user)
+      Cart.init_user_cart(@user)
       sign_in @user
 
       render json: @user

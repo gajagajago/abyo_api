@@ -9,6 +9,7 @@ class User < ApplicationRecord
   has_many :transactions, through: :assets
   has_many :products, dependent: :destroy
   has_many :favorites, dependent: :destroy
+  has_one :cart, dependent: :destroy
 
   def generate_new_authentication_token
     token = User.generate_unique_secure_token
