@@ -2,11 +2,13 @@ class Api::V1::RegistrationsController < ApplicationController
   def create
     @user = User.new(sign_up_params)
 
-    if @user.save
+    if @user.save!
       Asset.init_user_assets(@user)
+      sign_in @user
+
       render json: @user
     else
-      render json: { msg: "fail" }
+      render json: { msg: "fail sign up" }
     end
   end
 
